@@ -26,7 +26,9 @@ int main()
     while(1)
     {
         system("cls");
-        //First Page
+
+        //Home Page --- Primary Menu
+
         header();
         printf("\t\t------------------------------\n");
         printf("\t\t\tPrimary Menu\n");
@@ -36,9 +38,11 @@ int main()
 
         printf("Please Select a task from the Menu(a/b/c): ");
         scanf(" %c",&task);
+
         if(task=='a')
         {
-            //Page 2
+            //Search Page --- Secondary Menu
+
             system("cls");
             header();
             display(book_id,book_name,price,len);
@@ -47,10 +51,14 @@ int main()
             printf("\t\t------------------------------\n");
             printf("\t\t a.Linear Search\n\t\t b.Binary Search\n");
             footer();
+
             printf("Please Select a task from the Menu(a/b): ");
             scanf(" %c",&task2);
+
             if(task2=='a')
             {
+                //Linear Search Implementation
+
                 system("cls");
                 header();
                 printf("\tEnter the Book ID you want to purchase: ");
@@ -59,8 +67,12 @@ int main()
                 scanf("%d",&n_of_book);
                 printf("\n\n");
                 int index = linearSearch(book_id,len,id);
+
+                //Not Found Message
                 if(index==-1)
-                printf("\n\t\t      Sorry! Book ID Not Found.\n");
+                    printf("\n\t\t      Sorry! Book ID Not Found.\n");
+
+                //Order List
                 else
                 {
                     printf("\t-------------------------------------------------------\n");
@@ -70,6 +82,9 @@ int main()
                     printf("\n\t\t\t\t-------------------------------\n");
                     printf("\t\t\t\t Total Cost: %2d x %2d = %4d TK\n",price[index],n_of_book,price[index]*n_of_book);
                 }
+
+                //Footer with Home/Exit Menu
+
                 printf("\n\n\t\t\t  0 Home | # Exit");
                 footer();
                 printf("Please Select a task from the Menu(0/#): ");
@@ -85,8 +100,11 @@ int main()
                 }
 
             }
+
             else if(task2=='b')
             {
+                //Binary Search Implementation
+
                 system("cls");
                 header();
                 printf("\tEnter the Book ID you want to purchase: ");
@@ -94,8 +112,10 @@ int main()
                 printf("\n\tNumber of Book you want to purchase: ");
                 scanf("%d",&n_of_book);
                 printf("\n\n");
+
                 bubbleSort(book_id,book_name,price,len);
                 int index = binarySearch(book_id,0,len,id);
+
                 if(index==-1)
                 printf("\nSorry Book ID Not Found!\n");
                 else
@@ -107,7 +127,10 @@ int main()
                     printf("\n\t\t\t\t-------------------------------\n");
                     printf("\t\t\t\t Total Cost: %2d x %2d = %4d TK\n",price[index],n_of_book,price[index]*n_of_book);
                 }
-                   printf("\n\n\t\t\t  0 Home | # Exit");
+
+                //Footer with Home/Exit Menu
+
+                printf("\n\n\t\t\t  0 Home | # Exit");
                 footer();
                 printf("Please Select a task from the Menu(0/#): ");
                 scanf(" %c",&task4);
@@ -121,9 +144,15 @@ int main()
                     break;
                 }
             }
+
+            //Close Search Page
         }
+
+
         else if(task=='b')
         {
+            //Sort Page --- Secondary Menu
+
             system("cls");
             header();
             printf("\n\n\t\t------------------------------\n");
@@ -133,12 +162,18 @@ int main()
             footer();
             printf("Please Select a task from the Menu(a/b): ");
             scanf(" %c",&task3);
+
             if(task3=='a')
             {
+                //Bubble Sort Implementation
+
                 system("cls");
                 header();
                 bubbleSort(book_id,book_name,price,len);
                 display(book_id,book_name,price,len);
+
+                //Footer with Home/Exit Menu
+
                 printf("\n\n\t\t\t  0 Home | # Exit");
                 footer();
                 printf("Please Select a task from the Menu(0/#): ");
@@ -153,12 +188,18 @@ int main()
                     break;
                 }
             }
+
             else if(task3=='b')
             {
+                //Selection Sort Implementation
+
                 system("cls");
                 header();
                 selectionSort(book_id,book_name,price,len);
                 display(book_id,book_name,price,len);
+
+                //Footer with Home/Exit Menu
+
                 printf("\n\n\t\t\t  0 Home | # Exit");
                 footer();
                 printf("Please Select a task from the Menu(0/#): ");
@@ -173,24 +214,33 @@ int main()
                     break;
                 }
             }
+            //Close Sort Page
         }
+
+
         else if(task=='c')
         {
+            //Exit Page -- Thanks
+
             lastpage();
             break;
         }
+
         else
         {
+            //Looping
+
             printf("\n\t You Entered Wrong Key.\n\n");
             continue;
         }
 
-    return 0;
+        //Close Home Page
     }
+    return 0;
 }
 
 
-//My Functions
+//My All Functions
 
 void header()
 {
@@ -262,6 +312,23 @@ int binarySearch(int arr[],int low, int high,int key)
         return -1;
 }
 
+void bubbleSort(int arr[],char arr2[][100],int arr3[], int n)
+{
+    int i, j;
+    char t[100];
+    for (i = 0; i < n-1; i++)
+
+    for (j = 0; j < n-i-1; j++)
+        if (arr[j] > arr[j+1])
+        {
+            swaap(&arr[j], &arr[j+1]);
+            strcpy(t, arr2[j]);
+            strcpy(arr2[j], arr2[j+1]);
+            strcpy(arr2[j+1], t);
+            swaap(&arr3[j], &arr3[j+1]);
+        }
+}
+
 void selectionSort(int arr[],char arr2[][100],int arr3[], int n)
 {
     int i, j, min_idx;
@@ -282,23 +349,6 @@ void selectionSort(int arr[],char arr2[][100],int arr3[], int n)
         strcpy(arr2[i], t);
         swaap(&arr3[min_idx], &arr3[i]);
     }
-}
-
-void bubbleSort(int arr[],char arr2[][100],int arr3[], int n)
-{
-    int i, j;
-    char t[100];
-    for (i = 0; i < n-1; i++)
-
-    for (j = 0; j < n-i-1; j++)
-        if (arr[j] > arr[j+1])
-        {
-            swaap(&arr[j], &arr[j+1]);
-            strcpy(t, arr2[j]);
-            strcpy(arr2[j], arr2[j+1]);
-            strcpy(arr2[j+1], t);
-            swaap(&arr3[j], &arr3[j+1]);
-        }
 }
 
 
