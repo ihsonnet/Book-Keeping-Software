@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <unistd.h>
-#define MAX_ITER_COUNT 1000000
+
 
 void display();
 void swaap();
@@ -14,16 +13,15 @@ void selectionSort();
 void header();
 void footer();
 void lastpage();
-void take_enter();
 
 int main()
 {
 
     int id,n_of_book;
     char task,task2,task3,task4;
-    int book_id[]={12,1,15,6};
-    char book_name[][100] = {"Algorithm Design","C Programming Book","OOP Concept in C++","Computer Architecture"};
-    int price[] = {230,200,250,380};
+    int book_id[]={12,1,15,6,3,2,5,14,10,8};
+    char book_name[][100] = {"Algorithm Design","C Programming Book","OOP Concept in C++","Computer Architecture","Learn to Code With C","C for Python Coder","Modeling with Data","C Coding Boot Camp","Beej's Guide to C","C Elements of Style"};
+    int price[] = {230,200,250,380,300,320,250,290,400,350};
 
     int len = sizeof(book_id)/sizeof(book_id[0]);
 
@@ -75,7 +73,7 @@ int main()
                 clock_t begin_li = clock();
                 int index = linearSearch(book_id,len,id);
                 clock_t end_li = clock();
-                time_of_linear = (double)(end_li - begin_li)*100000/CLOCKS_PER_SEC;
+                time_of_linear = (double)(end_li - begin_li)/CLOCKS_PER_SEC;
 
                 //Not Found Message
                 if(index==-1)
@@ -92,7 +90,7 @@ int main()
                     printf("\t\t\t\t Total Cost: %2d x %2d = %4d TK\n",price[index],n_of_book,price[index]*n_of_book);
                 }
 
-                printf("\n\n\t\t( Time elpased is %f seconds )\n", time_of_linear); //execution time(elpased)
+                printf("\n\n\t\t( Time elpased is %lf seconds )\n", time_of_linear); //execution time(elpased)
 
                 //Footer with Home/Exit Menu
 
@@ -129,7 +127,7 @@ int main()
                 clock_t begin_bi = clock();
                 int index = binarySearch(book_id,0,len,id);
                 clock_t end_bi = clock();
-                time_of_binary = (double)(end_bi - begin_bi)*100000/CLOCKS_PER_SEC;
+                time_of_binary = (double)(end_bi - begin_bi)/CLOCKS_PER_SEC;
 
                 if(index==-1)
                 printf("\nSorry Book ID Not Found!\n");
@@ -143,7 +141,7 @@ int main()
                     printf("\t\t\t\t Total Cost: %2d x %2d = %4d TK\n",price[index],n_of_book,price[index]*n_of_book);
                 }
 
-                printf("\n\n\t\t( Time elpased is %f seconds )\n", time_of_binary); //execution time(elpased)
+                printf("\n\n\t\t( Time elpased is %lf seconds )\n", time_of_binary); //execution time(elpased)
 
                 //Footer with Home/Exit Menu
 
@@ -190,11 +188,11 @@ int main()
                 clock_t begin_bu = clock();
                 bubbleSort(book_id,book_name,price,len);
                 clock_t end_bu = clock();
-                time_of_bubble = (double)(end_bu - begin_bu)*100000/CLOCKS_PER_SEC;
+                time_of_bubble = (double)(end_bu - begin_bu)/CLOCKS_PER_SEC;
 
                 display(book_id,book_name,price,len);
 
-                printf("\n\n\t\t( Time elpased is %f seconds )\n", time_of_bubble); //execution time(elpased)
+                printf("\n\n\t\t( Time elpased is %lf seconds )\n", time_of_bubble); //execution time(elpased)
 
                 //Footer with Home/Exit Menu
 
@@ -223,11 +221,11 @@ int main()
                 clock_t begin_se = clock();
                 selectionSort(book_id,book_name,price,len);
                 clock_t end_se = clock();
-                time_of_selection = (double)(end_se - begin_se)*100000/CLOCKS_PER_SEC;
+                time_of_selection = (double)(end_se - begin_se)/CLOCKS_PER_SEC;
 
                 display(book_id,book_name,price,len);
 
-                printf("\n\n\t\t( Time elpased is %f seconds )\n", time_of_selection); //execution time(elpased)
+                printf("\n\n\t\t( Time elpased is %lf seconds )\n", time_of_selection); //execution time(elpased)
 
                 //Footer with Home/Exit Menu
 
@@ -272,15 +270,6 @@ int main()
 
 
 //My All Functions
-
-void take_enter() {
-    char task;
-   printf("Press enter to stop the counter \n");
-   while(1) {
-      if (scanf(" %c",&task))
-      break;
-   }
-}
 
 void header()
 {
