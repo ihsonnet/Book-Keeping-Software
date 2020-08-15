@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
+#include <unistd.h>
+#define MAX_ITER_COUNT 1000000
 
 void display();
 void swaap();
@@ -11,6 +14,7 @@ void selectionSort();
 void header();
 void footer();
 void lastpage();
+void take_enter();
 
 int main()
 {
@@ -22,6 +26,8 @@ int main()
     int price[] = {230,200,250,380};
 
     int len = sizeof(book_id)/sizeof(book_id[0]);
+
+    double time_of_linear = 0.0,time_of_binary = 0.0,time_of_bubble = 0.0,time_of_selection = 0.0;
 
     while(1)
     {
@@ -66,7 +72,10 @@ int main()
                 printf("\n\tNumber of Book you want to purchase: ");
                 scanf("%d",&n_of_book);
                 printf("\n\n");
+                clock_t begin_li = clock();
                 int index = linearSearch(book_id,len,id);
+                clock_t end_li = clock();
+                time_of_linear = (double)(end_li - begin_li)*100000/CLOCKS_PER_SEC;
 
                 //Not Found Message
                 if(index==-1)
@@ -82,6 +91,8 @@ int main()
                     printf("\n\t\t\t\t-------------------------------\n");
                     printf("\t\t\t\t Total Cost: %2d x %2d = %4d TK\n",price[index],n_of_book,price[index]*n_of_book);
                 }
+
+                printf("\n\n\t\t( Time elpased is %f seconds )\n", time_of_linear); //execution time(elpased)
 
                 //Footer with Home/Exit Menu
 
@@ -114,7 +125,11 @@ int main()
                 printf("\n\n");
 
                 bubbleSort(book_id,book_name,price,len);
+
+                clock_t begin_bi = clock();
                 int index = binarySearch(book_id,0,len,id);
+                clock_t end_bi = clock();
+                time_of_binary = (double)(end_bi - begin_bi)*100000/CLOCKS_PER_SEC;
 
                 if(index==-1)
                 printf("\nSorry Book ID Not Found!\n");
@@ -127,6 +142,8 @@ int main()
                     printf("\n\t\t\t\t-------------------------------\n");
                     printf("\t\t\t\t Total Cost: %2d x %2d = %4d TK\n",price[index],n_of_book,price[index]*n_of_book);
                 }
+
+                printf("\n\n\t\t( Time elpased is %f seconds )\n", time_of_binary); //execution time(elpased)
 
                 //Footer with Home/Exit Menu
 
@@ -169,8 +186,15 @@ int main()
 
                 system("cls");
                 header();
+
+                clock_t begin_bu = clock();
                 bubbleSort(book_id,book_name,price,len);
+                clock_t end_bu = clock();
+                time_of_bubble = (double)(end_bu - begin_bu)*100000/CLOCKS_PER_SEC;
+
                 display(book_id,book_name,price,len);
+
+                printf("\n\n\t\t( Time elpased is %f seconds )\n", time_of_bubble); //execution time(elpased)
 
                 //Footer with Home/Exit Menu
 
@@ -195,8 +219,15 @@ int main()
 
                 system("cls");
                 header();
+
+                clock_t begin_se = clock();
                 selectionSort(book_id,book_name,price,len);
+                clock_t end_se = clock();
+                time_of_selection = (double)(end_se - begin_se)*100000/CLOCKS_PER_SEC;
+
                 display(book_id,book_name,price,len);
+
+                printf("\n\n\t\t( Time elpased is %f seconds )\n", time_of_selection); //execution time(elpased)
 
                 //Footer with Home/Exit Menu
 
@@ -242,6 +273,15 @@ int main()
 
 //My All Functions
 
+void take_enter() {
+    char task;
+   printf("Press enter to stop the counter \n");
+   while(1) {
+      if (scanf(" %c",&task))
+      break;
+   }
+}
+
 void header()
 {
     printf("======================================================================\n");
@@ -253,7 +293,7 @@ void header()
 void footer()
 {
 
-    printf("\n\n======================================================================\n");
+    printf("\n======================================================================\n");
     printf("\t\t Developed By Inajamamul Haque Sonet\n");
     printf("======================================================================\n\n");
 }
