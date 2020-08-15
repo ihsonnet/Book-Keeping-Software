@@ -1,10 +1,10 @@
-## Book-Keeping-Software
+# Book-Keeping-Software
 [SE 215] Assignment 1: Book Keeping Software Engineer
 
-# Problem
+## Problem
 You are required to develop software for a bookkeeping store. You will be building an interactive menu-based software for your client using the C programming language.
 
-# Features
+## Features
 1. You are required to view a menu for the user. The menu will consist of:
           a. Search
           b. Sort
